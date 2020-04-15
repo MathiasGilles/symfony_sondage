@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SondageController!{% endblock %}
+{% block title %}Sondages{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% if sondages is not empty %}
+    <table class="table">
+        <thead>
+            <th>
+                <td>Title</td>
+                <td>Action</td>
+            </th>
+        </thead>
+        <tbody>
+            {% for sondage in sondages %}
+            <tr>
+                <td>{{sondage.name}}</td>
+                <td>
+                    <a href="{{path('sondage_edit', {id:sondage.id})}}" class="btn btn-primary">Edit</a>
+                    <a href="{{path('sondage_delete', {id:sondage.id})}}" class="btn btn-danger">Delete</a>
+                    <a href="{{path('sondage_detail', {id:sondage.id})}}" class="btn btn-primary">Show</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+<p>Il n'y a pas encore de sondages <a class="btn btn-primary" href="{{path('sondage_new')}}">Create sondage</a></p>
+{% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/macbook/Desktop/cours_back/symfony_sondage/src/Controller/SondageController.php'|file_link(0) }}">src/Controller/SondageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/macbook/Desktop/cours_back/symfony_sondage/templates/sondage/index.html.twig'|file_link(0) }}">templates/sondage/index.html.twig</a></code></li>
-    </ul>
-</div>
+
 {% endblock %}

@@ -1,20 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello QuestionController!{% endblock %}
+{% block title %}Questions{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% if questions is not empty %}
+    <a class="btn btn-primary" href="{{path('question_new')}}">Create Question</a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/macbook/Desktop/cours_back/symfony_sondage/src/Controller/QuestionController.php'|file_link(0) }}">src/Controller/QuestionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/macbook/Desktop/cours_back/symfony_sondage/templates/question/index.html.twig'|file_link(0) }}">templates/question/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <br><br>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Title</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td>{{question.title}}</td>
+                    <td><a class="btn btn-primary" href="{{path('question_edit', {id:question.id})}}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Il n'y a pas de question <a class="btn btn-primary" href="{{path('question_new')}}">Create Question</a></p>
+{% endif %}
+
 {% endblock %}

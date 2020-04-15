@@ -30,7 +30,7 @@ class Question
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Sondage", inversedBy="questions")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $sondage;
 

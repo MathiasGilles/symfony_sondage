@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Question;
+use App\Entity\Sondage;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +16,11 @@ class QuestionType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('sondage')
+            ->add('sondage',EntityType::class,[
+                'choice_label' => 'name',
+                'class' => Sondage::class
+            ])
+            ->add('save',SubmitType::class)
         ;
     }
 

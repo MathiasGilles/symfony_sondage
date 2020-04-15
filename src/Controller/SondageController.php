@@ -67,7 +67,7 @@ class SondageController extends AbstractController
     }
 
     /**
-     * @Route("/task/detail/{id}",name="task_detail")
+     * @Route("/sondage/detail/{id}",name="sondage_detail")
      */
     public function detail($id, SondageRepository $repo)
     {

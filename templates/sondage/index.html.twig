@@ -5,22 +5,30 @@
 {% block body %}
 
 {% if sondages is not empty %}
+    <a class="btn btn-primary" href="{{path('sondage_new')}}">Create Sondage</a>
+
+    <br><br>
+
     <table class="table">
         <thead>
-            <th>
+            <tr>
                 <td>Title</td>
+                <td>Question</td>
                 <td>Action</td>
-            </th>
+            </tr>
         </thead>
         <tbody>
             {% for sondage in sondages %}
             <tr>
                 <td>{{sondage.name}}</td>
                 <td>
-                    <a href="{{path('sondage_edit', {id:sondage.id})}}" class="btn btn-primary">Edit</a>
-                    <a href="{{path('sondage_delete', {id:sondage.id})}}" class="btn btn-danger">Delete</a>
-                    <a href="{{path('sondage_detail', {id:sondage.id})}}" class="btn btn-primary">Show</a>
+                    {% for question in sondage.questions %}
+                        <ul>
+                            <li>{{question.title}}</li>
+                        </ul>
+                    {% endfor %}
                 </td>
+                <td><a href="{{path('sondage_edit', {id:sondage.id})}}" class="btn btn-primary">Edit</a></td>
             </tr>
             {% endfor %}
         </tbody>
